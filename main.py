@@ -1710,6 +1710,7 @@ def devamfonksiyonu():
         Y1oyuncusu.isturn=True
     aktifsira().oyunzari1=int(Lines[24][0:-1])
     aktifsira().oyunzari2=int(Lines[25][0:-1])
+    print("sıra " + aktifsira().tasdegeri+" oyuncusunda")
     liste = [["A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11"],
 
              [anadict["A0"], anadict["A1"], anadict["A2"], anadict["A3"], anadict["A4"], anadict["A5"],
