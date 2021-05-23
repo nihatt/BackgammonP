@@ -845,6 +845,7 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
 
 
                 else:
+                    Gamer.toplay = ("A" + str(int(Gamer.pickfrom[1:]) - aktifzar+1))
                     if((anadict[("A" + str(abs(int(Gamer.pickfrom[1:]) - aktifzar + 1)))] == "0" or anadict[("A" + str(abs(int(Gamer.pickfrom[1:]) - aktifzar + 1)))][1:] == "Y") and (anadict[Gamer.pickfrom][-1] == "Y")):
 
                         print("hamle cok basarili")
@@ -918,6 +919,7 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(str(table.draw()) + "\n")
                                 f.write(" " + "\n")
                                 f.close()
+
                     elif (anadict[Gamer.toplay][1:] == "X" and anadict[Gamer.toplay][0:-1] == "1"):
                         rakipoyuncu().brokenflake += 1
                         print("rakip taşı kırdınız")
@@ -1000,7 +1002,7 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(" " + "\n")
                                 f.close()
                     else:
-                        print(Gamer.pickfrom)
+
                         print("hamle olumcul basarisiz")
                         tasinyerinidegistir(aktifsira(), aktifzar,i)
             else:
@@ -1157,7 +1159,8 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                     tasinyerinidegistir(aktifsira(), aktifzar,i)
 
 def disaricikarma(Gamer,aktifzar):
-    print(str(aktifzar)+ " oynamak için yer seçiniz")
+
+    print(str(aktifzar)+ " oynamak için yer seçiniz 1-2-5 ŞEKLİNDE SEÇİM YAPINIZ  ")
     Gamer.pickfrom = input()
     if (Gamer.pickfrom[0]!="A" and Gamer.pickfrom[0]!="B"):
         print("Hatalı seçim yaptınız A0 - B3 - A9 şeklinde seçim yapınız")
@@ -1475,6 +1478,7 @@ def anakontroller(Gamer,zarlar):
             if(aktifsira().brokenflake!=0):
 
                 if(len(zarlar)==2):
+                    print(str(aktifsira().brokenflake) + " adet kırık taşınız var")
                     deger=int(input("Hangi zar için oynayacaksın ----- hak eksiltmek için p yazın"))
                     if deger=="p":
                         i+=1
@@ -1489,6 +1493,7 @@ def anakontroller(Gamer,zarlar):
                             print("bu el giremediniz")
 
                 else:
+                    print(str(aktifsira().brokenflake) + " adet kırık taşınız var")
                     deger=int(input("Hangi zar için oynayacaksın ----- hak eksiltmek için p yazın"))
                     if deger=="p":
                         print("bir hakkınızı geçtiniz")
@@ -1575,13 +1580,11 @@ def aktifsira():
 def kiriktasoynama(Gamer,aktifzar):
 
 
-    print(str(Gamer.brokenflake)+ " adet kırık taşınız var")
+
 
 
     if(aktifsira().tasdegeri=="X"):  #x oyuncu için durumlar
 
-
-            print("kırık zar " + str(aktifzar)+" değerinden girilmeye çalışıyor")
 
 
             if(anadict["A"+str(12-aktifzar)]=="0" or anadict["A"+str(12-aktifzar)][1:]=="X" ): #girilecek yer boşsa ya da kendi taşımız varsa
