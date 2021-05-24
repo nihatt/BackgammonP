@@ -1479,12 +1479,12 @@ def anakontroller(Gamer,zarlar):
 
                 if(len(zarlar)==2):
                     print(str(aktifsira().brokenflake) + " adet kırık taşınız var")
-                    deger=int(input("Hangi zar için oynayacaksın ----- hak eksiltmek için p yazın"))
-                    if deger=="p":
+                    deger=(input("Hangi zar için oynayacaksın ----- hak eksiltmek için p yazın"))
+                    if str(deger)=="p" or str(deger)=="P":
                         i+=1
                         print("bir hakkınızı geçtiniz")
-                    elif(deger in zarlar):
-                        aktifzar=deger
+                    elif(int(deger) in zarlar):
+                        aktifzar=int(deger)
                         
                         if(kiriktasoynama(aktifsira(),aktifzar)):
                             zarlar.remove(aktifzar)
@@ -1494,12 +1494,12 @@ def anakontroller(Gamer,zarlar):
 
                 else:
                     print(str(aktifsira().brokenflake) + " adet kırık taşınız var")
-                    deger=int(input("Hangi zar için oynayacaksın ----- hak eksiltmek için p yazın"))
-                    if deger=="p":
+                    deger=(input("Hangi zar için oynayacaksın ----- hak eksiltmek için p yazın"))
+                    if str(deger)=="p" or str(deger)=="P":
                         print("bir hakkınızı geçtiniz")
                         i+=1
-                    elif(deger in zarlar):
-                        aktifzar=deger
+                    elif(int(deger) in zarlar):
+                        aktifzar=int(deger)
                         
                         if(kiriktasoynama(aktifsira(),aktifzar)):
                             i += 1
