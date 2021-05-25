@@ -1,4 +1,4 @@
-
+#FILE ORGANIZATION TERM PROJECT
 #1306190035
 #Nihat Pamukçu
 #python ile kodlandı
@@ -112,6 +112,8 @@ def ilkzaratilsin():
         Y1oyuncusu.isturn=False
         liste[2][5] = "Dice1      " + str(X1oyuncusu.ilkzar)
         liste[2][6] = "Dice2      " + str(Y1oyuncusu.ilkzar)
+        liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+        liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
         table.reset()
         table.add_rows(liste)
         print(table.draw())
@@ -122,6 +124,8 @@ def ilkzaratilsin():
         Y1oyuncusu.isturn=True
         liste[2][5] = "Dice1      " + str(X1oyuncusu.ilkzar)
         liste[2][6] = "Dice2      " + str(Y1oyuncusu.ilkzar)
+        liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+        liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
         table.reset()
         table.add_rows(liste)
         print(table.draw())
@@ -180,7 +184,7 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
     ikincizarim = Gamer.oyunzari2
     print(str(aktifzar) + " zarı icin hangi tasi oynatmak istiyorsunuz -------- bu eli pas geçmek için 'p' yazın -------------------  oyundan çıkmak için 'q' yazın")
     girdi = input()
-
+    liste[2][9] = "Turn of : " + str(aktifsira().tasdegeri)
     global ilkindex2
     global ikinciindex2
 
@@ -191,6 +195,9 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
     
     elif (girdi=="q" or girdi=="Q"):
         cikisfonksiyonu(i)
+    elif(girdi=="" or girdi == " "):
+        print("hatalı girdi")
+        tasinyerinidegistir(aktifsira(),aktifzar,i)
     else:
         Gamer.pickfrom=girdi
     if (Gamer.pickfrom[0]!="A" and Gamer.pickfrom[0]!="B"):
@@ -232,13 +239,13 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                     else:
                         anadict[Gamer.pickfrom] = str((int(float(anadict[Gamer.pickfrom][0:-1])) - 1)) + Gamer.tasdegeri # tas alinanyerden taş eksiltildi
                     if Gamer.pickfrom[0] == "A":
-                        print("ok1")
+
                         sifirtoplayici()
                         liste[1][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                         table.reset()
                         table.add_rows(liste)
                     elif Gamer.pickfrom[0] == "B":
-                        print("ok2")
+
                         sifirtoplayici()
                         liste[3][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                         table.reset()
@@ -247,9 +254,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                     if anadict[Gamer.toplay] == "0":  # taş eklenen yerin güncellemesi
                         anadict[Gamer.toplay] = str(int(anadict[Gamer.toplay][0]) + 1) + Gamer.tasdegeri
                         if Gamer.toplay[0] == "A":
-                            print("ok3")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -258,9 +267,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                             f.write(" " + "\n")
                             f.close()
                         elif Gamer.toplay[0] == "B":
-                            print("ok4")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -271,9 +282,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                     else:
                         anadict[Gamer.toplay] = str(int(anadict[Gamer.toplay][0:-1]) + 1) + anadict[Gamer.toplay][-1]  # taş eklenen yerin güncellemesi2
                         if Gamer.toplay[0] == "A":
-                            print("ok5")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -282,9 +295,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                             f.write(" " + "\n")
                             f.close()
                         elif Gamer.toplay[0] == "B":
-                            print("ok6")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -304,13 +319,13 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                     else:
                         anadict[Gamer.pickfrom] = str((int(float(anadict[Gamer.pickfrom][0:-1])) - 1)) + Gamer.tasdegeri # tas alinanyerden taş eksiltildi
                     if Gamer.pickfrom[0] == "A":
-                        print("ok1")
+
                         sifirtoplayici()
                         liste[1][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                         table.reset()
                         table.add_rows(liste)
                     elif Gamer.pickfrom[0] == "B":
-                        print("ok2")
+
                         sifirtoplayici()
                         liste[3][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                         table.reset()
@@ -319,9 +334,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                     if anadict[Gamer.toplay] == "0":  # taş eklenen yerin güncellemesi
                         anadict[Gamer.toplay] = str(1) + Gamer.tasdegeri
                         if Gamer.toplay[0] == "A":
-                            print("ok3")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -330,9 +347,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                             f.write(" " + "\n")
                             f.close()
                         elif Gamer.toplay[0] == "B":
-                            print("ok4")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -345,9 +364,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         anadict[Gamer.toplay] = "0"
                         anadict[Gamer.toplay] = str(1) + Gamer.tasdegeri # taş eklenen yerin güncellemesi2
                         if Gamer.toplay[0] == "A":
-                            print("ok5")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -356,9 +377,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                             f.write(" " + "\n")
                             f.close()
                         elif Gamer.toplay[0] == "B":
-                            print("ok6")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -388,13 +411,13 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         else:
                             anadict[Gamer.pickfrom] = str((int(float(anadict[Gamer.pickfrom][0:-1])) - 1)) + Gamer.tasdegeri # tas alinanyerden taş eksiltildi
                         if Gamer.pickfrom[0] == "A":
-                            print("ok1")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                             table.reset()
                             table.add_rows(liste)
                         elif Gamer.pickfrom[0] == "B":
-                            print("ok2")
+
                             sifirtoplayici()
 
                             liste[3][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
@@ -404,9 +427,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         if anadict[Gamer.toplay] == "0":  # taş eklenen yerin güncellemesi
                             anadict[Gamer.toplay] = str(int(anadict[Gamer.toplay][0]) + 1) + Gamer.tasdegeri
                             if Gamer.toplay[0] == "A":
-                                print("ok3")
+
                                 sifirtoplayici()
                                 liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -415,9 +440,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(" " + "\n")
                                 f.close()
                             elif Gamer.toplay[0] == "B":
-                                print("ok4")
+
                                 sifirtoplayici()
                                 liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -429,9 +456,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         else:
                             anadict[Gamer.toplay] = str(int(anadict[Gamer.toplay][0:-1]) + 1) + anadict[Gamer.toplay][-1]  # taş eklenen yerin güncellemesi2
                             if Gamer.toplay[0] == "A":
-                                print("ok5")
+
                                 sifirtoplayici()
                                 liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -440,9 +469,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(" " + "\n")
                                 f.close()
                             elif Gamer.toplay[0] == "B":
-                                print("ok6")
+
                                 sifirtoplayici()
                                 liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -460,13 +491,13 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         else:
                             anadict[Gamer.pickfrom] = str((int(float(anadict[Gamer.pickfrom][0:-1])) - 1)) + Gamer.tasdegeri # tas alinanyerden taş eksiltildi
                         if Gamer.pickfrom[0] == "A":
-                            print("ok1")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                             table.reset()
                             table.add_rows(liste)
                         elif Gamer.pickfrom[0] == "B":
-                            print("ok2")
+
                             sifirtoplayici()
 
                             liste[3][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
@@ -476,9 +507,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         if anadict[Gamer.toplay] == "0":  # taş eklenen yerin güncellemesi
                             anadict[Gamer.toplay] = str(1) + Gamer.tasdegeri
                             if Gamer.toplay[0] == "A":
-                                print("ok3")
+
                                 sifirtoplayici()
                                 liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -487,9 +520,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(" " + "\n")
                                 f.close()
                             elif Gamer.toplay[0] == "B":
-                                print("ok4")
+
                                 sifirtoplayici()
                                 liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -501,9 +536,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         else:
                             anadict[Gamer.toplay] = str(1) + Gamer.tasdegeri  # taş eklenen yerin güncellemesi2
                             if Gamer.toplay[0] == "A":
-                                print("ok5")
+
                                 sifirtoplayici()
                                 liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -512,9 +549,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(" " + "\n")
                                 f.close()
                             elif Gamer.toplay[0] == "B":
-                                print("ok6")
+
                                 sifirtoplayici()
                                 liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -540,13 +579,13 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 (int(float(anadict[Gamer.pickfrom][0:-1])) - 1)) + Gamer.tasdegeri # tas alinanyerden taş eksiltildi
 
                         if Gamer.pickfrom[0] == "A":
-                            print("ok1")
+
                             sifirtoplayici()
                             liste[1][(int(Gamer.pickfrom[1:]))] = anadict[Gamer.pickfrom]
                             table.reset()
                             table.add_rows(liste)
                         elif Gamer.pickfrom[0] == "B":
-                            print("ok2")
+
                             sifirtoplayici()
                             liste[3][(int(Gamer.pickfrom[1:]))] = anadict[Gamer.pickfrom]
                             table.reset()
@@ -556,9 +595,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         if anadict[Gamer.toplay] == "0":  # taş eklenen yerin güncellemesi
                             anadict[Gamer.toplay] = str(int(anadict[Gamer.toplay][0]) + 1) + Gamer.tasdegeri
                             if Gamer.toplay[0] == "A":
-                                print("ok3")
+
                                 sifirtoplayici()
                                 liste[1][(int(Gamer.toplay[1:]))] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -567,9 +608,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(" " + "\n")
                                 f.close()
                             elif Gamer.toplay[0] == "B":
-                                print("ok4")
+
                                 sifirtoplayici()
                                 liste[3][(int(Gamer.toplay[1:]))] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -582,9 +625,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                             anadict[Gamer.toplay] = str(int(anadict[Gamer.toplay][0:-1]) + 1) + anadict[Gamer.toplay][
                                 -1]  # taş eklenen yerin güncellemesi2
                             if Gamer.toplay[0] == "A":
-                                print("ok5")
+
                                 sifirtoplayici()
                                 liste[1][(int(Gamer.toplay[1:]))] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -593,9 +638,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(" " + "\n")
                                 f.close()
                             elif Gamer.toplay[0] == "B":
-                                print("ok6")
+
                                 sifirtoplayici()
                                 liste[3][(int(Gamer.toplay[1:]))] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -615,13 +662,13 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 (int(float(anadict[Gamer.pickfrom][0:-1])) - 1)) + Gamer.tasdegeri  # tas alinanyerden taş eksiltildi
 
                         if Gamer.pickfrom[0] == "A":
-                            print("ok1")
+
                             sifirtoplayici()
                             liste[1][(int(Gamer.pickfrom[1:]))] = anadict[Gamer.pickfrom]
                             table.reset()
                             table.add_rows(liste)
                         elif Gamer.pickfrom[0] == "B":
-                            print("ok2")
+
                             sifirtoplayici()
                             liste[3][(int(Gamer.pickfrom[1:]))] = anadict[Gamer.pickfrom]
                             table.reset()
@@ -630,9 +677,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         if anadict[Gamer.toplay] == "0":  # taş eklenen yerin güncellemesi
                             anadict[Gamer.toplay] = str(1) + Gamer.tasdegeri
                             if Gamer.toplay[0] == "A":
-                                print("ok3")
+
                                 sifirtoplayici()
                                 liste[1][(int(Gamer.toplay[1:]))] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -641,9 +690,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(" " + "\n")
                                 f.close()
                             elif Gamer.toplay[0] == "B":
-                                print("ok4")
+
                                 sifirtoplayici()
                                 liste[3][(int(Gamer.toplay[1:]))] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -655,9 +706,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         else:
                             anadict[Gamer.toplay] = str(1) + Gamer.tasdegeri # taş eklenen yerin güncellemesi2
                             if Gamer.toplay[0] == "A":
-                                print("ok5")
+
                                 sifirtoplayici()
                                 liste[1][(int(Gamer.toplay[1:]))] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -666,9 +719,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(" " + "\n")
                                 f.close()
                             elif Gamer.toplay[0] == "B":
-                                print("ok6")
+
                                 sifirtoplayici()
                                 liste[3][(int(Gamer.toplay[1:]))] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -705,13 +760,13 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                           # tas alinanyerden taş eksiltildi
                         print(anadict[Gamer.pickfrom])
                         if Gamer.pickfrom[0] == "A":
-                            print("ok1")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                             table.reset()
                             table.add_rows(liste)
                         elif Gamer.pickfrom[0] == "B":
-                            print("ok2")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                             table.reset()
@@ -720,7 +775,7 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         if anadict[Gamer.toplay] == "0":  # taş eklenen yerin güncellemesi
                             anadict[Gamer.toplay] = str(int(anadict[Gamer.toplay][0]) + 1) + Gamer.tasdegeri
                             if Gamer.toplay[0] == "A":
-                                print("ok3")
+
                                 sifirtoplayici()
                                 liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                                 table.reset()
@@ -731,7 +786,7 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(" " + "\n")
                                 f.close()
                             elif Gamer.toplay[0] == "B":
-                                print("ok4")
+
                                 sifirtoplayici()
                                 liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                                 table.reset()
@@ -745,7 +800,7 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         else:
                             anadict[Gamer.toplay] = str(int(anadict[Gamer.toplay][0:-1]) + 1) + Gamer.tasdegeri  # taş eklenen yerin güncellemesi2
                             if Gamer.toplay[0] == "A":
-                                print("ok5")
+
                                 sifirtoplayici()
                                 liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                                 table.reset()
@@ -756,7 +811,7 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(" " + "\n")
                                 f.close()
                             elif Gamer.toplay[0] == "B":
-                                print("ok6")
+
                                 sifirtoplayici()
                                 liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                                 table.reset()
@@ -777,13 +832,13 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                             anadict[Gamer.pickfrom] = str((int(float(anadict[Gamer.pickfrom][0:-1])) - 1)) + Gamer.tasdegeri# tas alinanyerden taş eksiltildi
                         print(anadict[Gamer.pickfrom])
                         if Gamer.pickfrom[0] == "A":
-                            print("ok1")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                             table.reset()
                             table.add_rows(liste)
                         elif Gamer.pickfrom[0] == "B":
-                            print("ok2")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                             table.reset()
@@ -792,7 +847,7 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         if anadict[Gamer.toplay] == "0":  # taş eklenen yerin güncellemesi
                             anadict[Gamer.toplay] = str(1) + Gamer.tasdegeri
                             if Gamer.toplay[0] == "A":
-                                print("ok3")
+
                                 sifirtoplayici()
                                 liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                                 table.reset()
@@ -803,7 +858,7 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(" " + "\n")
                                 f.close()
                             elif Gamer.toplay[0] == "B":
-                                print("ok4")
+
                                 sifirtoplayici()
                                 liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                                 table.reset()
@@ -817,7 +872,7 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         else:
                             anadict[Gamer.toplay] = str(1) + Gamer.tasdegeri  # taş eklenen yerin güncellemesi2
                             if Gamer.toplay[0] == "A":
-                                print("ok5")
+
                                 sifirtoplayici()
                                 liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                                 table.reset()
@@ -828,7 +883,7 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(" " + "\n")
                                 f.close()
                             elif Gamer.toplay[0] == "B":
-                                print("ok6")
+
                                 sifirtoplayici()
                                 liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                                 table.reset()
@@ -858,13 +913,13 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                             anadict[Gamer.pickfrom] = str((int(float(anadict[Gamer.pickfrom][0:-1])) - 1)) + Gamer.tasdegeri  # tas alinanyerden taş eksiltildi
                         print(anadict[Gamer.pickfrom])
                         if Gamer.pickfrom[0] == "A":
-                            print("ok1")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                             table.reset()
                             table.add_rows(liste)
                         elif Gamer.pickfrom[0] == "B":
-                            print("ok2")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                             table.reset()
@@ -873,9 +928,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         if anadict[Gamer.toplay] == "0":  # taş eklenen yerin güncellemesi
                             anadict[Gamer.toplay] = str(int(anadict[Gamer.toplay][0]) + 1) + Gamer.tasdegeri
                             if Gamer.toplay[0] == "A":
-                                print("ok3")
+
                                 sifirtoplayici()
                                 liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -884,9 +941,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(" " + "\n")
                                 f.close()
                             elif Gamer.toplay[0] == "B":
-                                print("ok4")
+
                                 sifirtoplayici()
                                 liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -898,9 +957,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         else:
                             anadict[Gamer.toplay] = str(int(anadict[Gamer.toplay][0:-1]) + 1) + Gamer.tasdegeri  # taş eklenen yerin güncellemesi2
                             if Gamer.toplay[0] == "A":
-                                print("ok5")
+
                                 sifirtoplayici()
                                 liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -909,9 +970,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(" " + "\n")
                                 f.close()
                             elif Gamer.toplay[0] == "B":
-                                print("ok6")
+
                                 sifirtoplayici()
                                 liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -930,9 +993,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                             anadict[Gamer.pickfrom] = str((int(float(anadict[Gamer.pickfrom][0:-1])) - 1)) + Gamer.tasdegeri  # tas alinanyerden taş eksiltildi
                         print(anadict[Gamer.pickfrom])
                         if Gamer.pickfrom[0] == "A":
-                            print("ok1")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -941,9 +1006,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                             f.write(" " + "\n")
                             f.close()
                         elif Gamer.pickfrom[0] == "B":
-                            print("ok2")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -955,9 +1022,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         if anadict[Gamer.toplay] == "0":  # taş eklenen yerin güncellemesi
                             anadict[Gamer.toplay] = str(1) + Gamer.tasdegeri
                             if Gamer.toplay[0] == "A":
-                                print("ok3")
+
                                 sifirtoplayici()
                                 liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -966,9 +1035,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(" " + "\n")
                                 f.close()
                             elif Gamer.toplay[0] == "B":
-                                print("ok4")
+
                                 sifirtoplayici()
                                 liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -980,9 +1051,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         else:
                             anadict[Gamer.toplay] = str(1) + Gamer.tasdegeri  # taş eklenen yerin güncellemesi2
                             if Gamer.toplay[0] == "A":
-                                print("ok5")
+
                                 sifirtoplayici()
                                 liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -991,9 +1064,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                                 f.write(" " + "\n")
                                 f.close()
                             elif Gamer.toplay[0] == "B":
-                                print("ok6")
+
                                 sifirtoplayici()
                                 liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                                 table.reset()
                                 table.add_rows(liste)
                                 print(table.draw())
@@ -1018,14 +1093,14 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         anadict[Gamer.pickfrom] = str((int(float(anadict[Gamer.pickfrom][0:-1])) - 1)) + Gamer.tasdegeri  # tas alinanyerden taş eksiltildi
                     print(anadict[Gamer.pickfrom])
                     if Gamer.pickfrom[0] == "A":
-                        print("ok1")
+
                         sifirtoplayici()
                         liste[1][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                         table.reset()
                         table.add_rows(liste)
 
                     elif Gamer.pickfrom[0] == "B":
-                        print("ok2")
+
                         sifirtoplayici()
                         liste[3][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                         table.reset()
@@ -1035,9 +1110,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                     if anadict[Gamer.toplay] == "0":  # taş eklenen yerin güncellemesi
                         anadict[Gamer.toplay] = str(int(anadict[Gamer.toplay][0]) + 1) + Gamer.tasdegeri
                         if Gamer.toplay[0] == "A":
-                            print("ok3")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -1046,9 +1123,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                             f.write(" " + "\n")
                             f.close()
                         elif Gamer.toplay[0] == "B":
-                            print("ok4")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -1060,9 +1139,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                     else:
                         anadict[Gamer.toplay] = str(int(anadict[Gamer.toplay][0:-1]) + 1) + anadict[Gamer.toplay][-1]  # taş eklenen yerin güncellemesi2
                         if Gamer.toplay[0] == "A":
-                            print("ok5")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -1071,9 +1152,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                             f.write(" " + "\n")
                             f.close()
                         elif Gamer.toplay[0] == "B":
-                            print("ok6")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -1091,14 +1174,14 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                         anadict[Gamer.pickfrom] = str((int(float(anadict[Gamer.pickfrom][0:-1])) - 1)) + Gamer.tasdegeri  # tas alinanyerden taş eksiltildi
                     print(anadict[Gamer.pickfrom])
                     if Gamer.pickfrom[0] == "A":
-                        print("ok1")
+
                         sifirtoplayici()
                         liste[1][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                         table.reset()
                         table.add_rows(liste)
 
                     elif Gamer.pickfrom[0] == "B":
-                        print("ok2")
+
                         sifirtoplayici()
                         liste[3][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                         table.reset()
@@ -1108,9 +1191,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                     if anadict[Gamer.toplay] == "0":  # taş eklenen yerin güncellemesi
                         anadict[Gamer.toplay] = str(1) + Gamer.tasdegeri
                         if Gamer.toplay[0] == "A":
-                            print("ok3")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -1119,9 +1204,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                             f.write(" " + "\n")
                             f.close()
                         elif Gamer.toplay[0] == "B":
-                            print("ok4")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -1133,9 +1220,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                     else:
                         anadict[Gamer.toplay] = str(1) + Gamer.tasdegeri  # taş eklenen yerin güncellemesi2
                         if Gamer.toplay[0] == "A":
-                            print("ok5")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -1144,9 +1233,11 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                             f.write(" " + "\n")
                             f.close()
                         elif Gamer.toplay[0] == "B":
-                            print("ok6")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
@@ -1159,7 +1250,9 @@ def tasinyerinidegistir(Gamer,aktifzar,i):
                     tasinyerinidegistir(aktifsira(), aktifzar,i)
 
 def disaricikarma(Gamer,aktifzar):
-
+    liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+    liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
+    liste[2][9] = "Turn of : " + str(aktifsira().tasdegeri)
     print(str(aktifzar)+ " oynamak için yer seçiniz 1-2-5 ŞEKLİNDE SEÇİM YAPINIZ  ")
     Gamer.pickfrom = input()
     if (Gamer.pickfrom[0]!="A" and Gamer.pickfrom[0]!="B"):
@@ -1180,14 +1273,14 @@ def disaricikarma(Gamer,aktifzar):
                     else:
                         anadict[Gamer.pickfrom] = str((int(float(anadict[Gamer.pickfrom][0:-1])) - 1)) + Gamer.tasdegeri  # tas alinanyerden taş eksiltildi
                     if Gamer.pickfrom[0] == "A":
-                        print("ok1")
+
                         sifirtoplayici()
                         liste[1][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                         table.reset()
                         table.add_rows(liste)
 
                     elif Gamer.pickfrom[0] == "B":
-                        print("ok2")
+
                         sifirtoplayici()
                         liste[3][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                         table.reset()
@@ -1196,14 +1289,14 @@ def disaricikarma(Gamer,aktifzar):
                     if anadict[Gamer.toplay] == "0":  # taş eklenen yerin güncellemesi
                         anadict[Gamer.toplay] = str(int(anadict[Gamer.toplay][0]) + 1) + Gamer.tasdegeri
                         if Gamer.toplay[0] == "A":
-                            print("ok3")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
                         elif Gamer.toplay[0] == "B":
-                            print("ok4")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                             table.reset()
@@ -1213,14 +1306,14 @@ def disaricikarma(Gamer,aktifzar):
                     else:
                         anadict[Gamer.toplay] = str(int(anadict[Gamer.toplay][0:-1]) + 1) + Gamer.tasdegeri # taş eklenen yerin güncellemesi2
                         if Gamer.toplay[0] == "A":
-                            print("ok5")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
                         elif Gamer.toplay[0] == "B":
-                            print("ok6")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                             table.reset()
@@ -1235,14 +1328,14 @@ def disaricikarma(Gamer,aktifzar):
                     else:
                         anadict[Gamer.pickfrom] = str((int(float(anadict[Gamer.pickfrom][0:-1])) - 1)) + Gamer.tasdegeri  # tas alinanyerden taş eksiltildi
                     if Gamer.pickfrom[0] == "A":
-                        print("ok1")
+
                         sifirtoplayici()
                         liste[1][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                         table.reset()
                         table.add_rows(liste)
 
                     elif Gamer.pickfrom[0] == "B":
-                        print("ok2")
+
                         sifirtoplayici()
                         liste[3][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                         table.reset()
@@ -1252,14 +1345,14 @@ def disaricikarma(Gamer,aktifzar):
                     if anadict[Gamer.toplay] == "0":  # taş eklenen yerin güncellemesi
                         anadict[Gamer.toplay] = str(1) + Gamer.tasdegeri
                         if Gamer.toplay[0] == "A":
-                            print("ok3")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
                         elif Gamer.toplay[0] == "B":
-                            print("ok4")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                             table.reset()
@@ -1270,14 +1363,14 @@ def disaricikarma(Gamer,aktifzar):
                         anadict[Gamer.toplay] = "0"
                         anadict[Gamer.toplay] = str(1) + Gamer.tasdegeri  # taş eklenen yerin güncellemesi2
                         if Gamer.toplay[0] == "A":
-                            print("ok5")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
                         elif Gamer.toplay[0] == "B":
-                            print("ok6")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                             table.reset()
@@ -1298,14 +1391,14 @@ def disaricikarma(Gamer,aktifzar):
                 else:
                     anadict[Gamer.pickfrom] = str((int(float(anadict[Gamer.pickfrom][0:-1])) - 1)) + Gamer.tasdegeri  # tas alinanyerden taş eksiltildi
                 if Gamer.pickfrom[0] == "A":
-                    print("ok1")
+
                     sifirtoplayici()
                     liste[1][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                     table.reset()
                     table.add_rows(liste)
                     print(table.draw())
                 elif Gamer.pickfrom[0] == "B":
-                    print("ok2")
+
                     sifirtoplayici()
                     liste[3][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                     table.reset()
@@ -1322,14 +1415,14 @@ def disaricikarma(Gamer,aktifzar):
                     else:anadict[Gamer.pickfrom] = str((int(float(anadict[Gamer.pickfrom][0:-1])) - 1)) + Gamer.tasdegeri# tas alinanyerden taş eksiltildi
                     print(anadict[Gamer.pickfrom])
                     if Gamer.pickfrom[0] == "A":
-                        print("ok1")
+
                         sifirtoplayici()
                         liste[1][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                         table.reset()
                         table.add_rows(liste)
 
                     elif Gamer.pickfrom[0] == "B":
-                        print("ok2")
+
                         sifirtoplayici()
                         liste[3][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                         table.reset()
@@ -1339,14 +1432,14 @@ def disaricikarma(Gamer,aktifzar):
                     if anadict[Gamer.toplay] == "0":  # taş eklenen yerin güncellemesi
                         anadict[Gamer.toplay] = str(int(anadict[Gamer.toplay][0]) + 1) + Gamer.tasdegeri
                         if Gamer.toplay[0] == "A":
-                            print("ok3")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
                         elif Gamer.toplay[0] == "B":
-                            print("ok4")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                             table.reset()
@@ -1356,14 +1449,14 @@ def disaricikarma(Gamer,aktifzar):
                     else:
                         anadict[Gamer.toplay] = str(int(anadict[Gamer.toplay][0:-1]) + 1) + Gamer.tasdegeri  # taş eklenen yerin güncellemesi2
                         if Gamer.toplay[0] == "A":
-                            print("ok5")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
                         elif Gamer.toplay[0] == "B":
-                            print("ok6")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                             table.reset()
@@ -1383,14 +1476,14 @@ def disaricikarma(Gamer,aktifzar):
                         anadict[Gamer.pickfrom] = str((int(float(anadict[Gamer.pickfrom][0:-1])) - 1)) + Gamer.tasdegeri  # tas alinanyerden taş eksiltildi
                     print(anadict[Gamer.pickfrom])
                     if Gamer.pickfrom[0] == "A":
-                        print("ok1")
+
                         sifirtoplayici()
                         liste[1][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                         table.reset()
                         table.add_rows(liste)
 
                     elif Gamer.pickfrom[0] == "B":
-                        print("ok2")
+
                         sifirtoplayici()
                         liste[3][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                         table.reset()
@@ -1400,14 +1493,14 @@ def disaricikarma(Gamer,aktifzar):
                     if anadict[Gamer.toplay] == "0":  # taş eklenen yerin güncellemesi
                         anadict[Gamer.toplay] = str(1) + Gamer.tasdegeri
                         if Gamer.toplay[0] == "A":
-                            print("ok3")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
                         elif Gamer.toplay[0] == "B":
-                            print("ok4")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                             table.reset()
@@ -1417,14 +1510,14 @@ def disaricikarma(Gamer,aktifzar):
                     else:
                         anadict[Gamer.toplay] = str(1) + Gamer.tasdegeri  # taş eklenen yerin güncellemesi2
                         if Gamer.toplay[0] == "A":
-                            print("ok5")
+
                             sifirtoplayici()
                             liste[1][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                             table.reset()
                             table.add_rows(liste)
                             print(table.draw())
                         elif Gamer.toplay[0] == "B":
-                            print("ok6")
+
                             sifirtoplayici()
                             liste[3][int(Gamer.toplay[1:])] = anadict[Gamer.toplay]
                             table.reset()
@@ -1443,14 +1536,14 @@ def disaricikarma(Gamer,aktifzar):
                 else:
                     anadict[Gamer.pickfrom] = str((int(float(anadict[Gamer.pickfrom][0:-1])) - 1)) + Gamer.tasdegeri  # tas alinanyerden taş eksiltildi
                 if Gamer.pickfrom[0] == "A":
-                    print("ok1")
+
                     sifirtoplayici()
                     liste[1][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                     table.reset()
                     table.add_rows(liste)
                     print(table.draw())
                 elif Gamer.pickfrom[0] == "B":
-                    print("ok2")
+
                     sifirtoplayici()
                     liste[3][int(Gamer.pickfrom[1:])] = anadict[Gamer.pickfrom]
                     table.reset()
@@ -1472,8 +1565,15 @@ def gameover():
     sys.exit()
 
 def anakontroller(Gamer,zarlar):
+        global table
+        global liste
+        liste[2][9] = "Turn of : " + str(aktifsira().tasdegeri)
         i=0
         while i != aktifsira().turnright:
+            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
+            table.reset()
+            table.add_rows(liste)
             homeflakex()
             if(aktifsira().brokenflake!=0):
 
@@ -1481,14 +1581,24 @@ def anakontroller(Gamer,zarlar):
                     print(str(aktifsira().brokenflake) + " adet kırık taşınız var")
                     deger=(input("Hangi zar için oynayacaksın ----- hak eksiltmek için p yazın"))
                     if str(deger)=="p" or str(deger)=="P":
+                        liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                        liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
+                        table.reset()
+                        table.add_rows(liste)
                         i+=1
+
                         print("bir hakkınızı geçtiniz")
                     elif(int(deger) in zarlar):
                         aktifzar=int(deger)
                         
                         if(kiriktasoynama(aktifsira(),aktifzar)):
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
+                            table.reset()
+                            table.add_rows(liste)
                             zarlar.remove(aktifzar)
                             i+=1
+
                         else:
                             print("bu el giremediniz")
 
@@ -1497,12 +1607,18 @@ def anakontroller(Gamer,zarlar):
                     deger=(input("Hangi zar için oynayacaksın ----- hak eksiltmek için p yazın"))
                     if str(deger)=="p" or str(deger)=="P":
                         print("bir hakkınızı geçtiniz")
+
                         i+=1
                     elif(int(deger) in zarlar):
                         aktifzar=int(deger)
                         
                         if(kiriktasoynama(aktifsira(),aktifzar)):
+                            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
+                            table.reset()
+                            table.add_rows(liste)
                             i += 1
+
                             zarlar.remove(aktifzar)
                         else:
                             print("bu el oyuna giremediniz")
@@ -1515,16 +1631,30 @@ def anakontroller(Gamer,zarlar):
             elif(aktifsira().homeflake+aktifsira().outflakes==15):
                 if(aktifsira().outflakes==15):
                     gameover()
+                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
+                table.reset()
+                table.add_rows(liste)
                 aktifzar=zarlar[0]
                 (disaricikarma(aktifsira(),aktifzar))
+
                 i += 1
+
                 zarlar.remove(zarlar[0])
 
             else:
+                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
+                table.reset()
+                table.add_rows(liste)
                 aktifzar = zarlar[0]
                 tasinyerinidegistir(aktifsira(),aktifzar,i)
                 i += 1
                 zarlar.remove(zarlar[0])
+            liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+            liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
+            table.reset()
+            table.add_rows(liste)
         aktifsira().turnright=0
         rakipoyuncu().turnright=0
         deaktifsira().isturn = True
@@ -1578,6 +1708,9 @@ def aktifsira():
     else: return Y1oyuncusu
 
 def kiriktasoynama(Gamer,aktifzar):
+    liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+    liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
+    liste[2][9] = "Turn of : " + str(aktifsira().tasdegeri)
 
 
 
@@ -1592,8 +1725,11 @@ def kiriktasoynama(Gamer,aktifzar):
                     print("kırık taş oyuna girildi")
                     anadict["A" + str(12 - aktifzar)] = str(int(anadict["A" + str(12 - aktifzar)][0])+1)+"X"
                     liste[1][12 - aktifzar] = anadict["A" + str(12 - aktifzar)]
+                    liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                    liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                     table.reset()
                     table.add_rows(liste)
+
                     print(table.draw())
                     return True
 
@@ -1604,6 +1740,8 @@ def kiriktasoynama(Gamer,aktifzar):
                     anadict["A" + str(12 - aktifzar)]="0"
                     anadict["A" + str(12 - aktifzar)] = str(int(anadict["A" + str(12 - aktifzar)][0])+1)+"X"
                     liste[1][12 - aktifzar] = anadict["A" + str(12 - aktifzar)]
+                    liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                    liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                     table.reset()
                     table.add_rows(liste)
                     print(table.draw())
@@ -1621,6 +1759,8 @@ def kiriktasoynama(Gamer,aktifzar):
                 print("kırık taş oyuna girildi")
                 anadict["B" + str(12 - aktifzar)] = str(int(anadict["B" + str(12 - aktifzar)][0]) + 1) + "Y"
                 liste[3][12 - aktifzar] = anadict["B" + str(12 - aktifzar)]
+                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                 table.reset()
                 table.add_rows(liste)
                 print(table.draw())
@@ -1633,6 +1773,8 @@ def kiriktasoynama(Gamer,aktifzar):
                 anadict["B" + str(12 - aktifzar)] = "0"
                 anadict["B" + str(12 - aktifzar)] = str(int(anadict["B" + str(12 - aktifzar)][0]) + 1) + "Y"
                 liste[3][12 - aktifzar] = anadict["B" + str(12 - aktifzar)]
+                liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+                liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
                 table.reset()
                 table.add_rows(liste)
                 print(table.draw())
@@ -1644,6 +1786,9 @@ def kiriktasoynama(Gamer,aktifzar):
 def zarsalla(Gamer):
 
         global liste
+        liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+        liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
+        liste[2][9] = "Turn of : " + str(aktifsira().tasdegeri)
         print(str(aktifsira().tasdegeri)+" oyuncusu zar atıyor")
         zar1 =random.randint(1,6)
         print("İlk zar "+ str(zar1)+" geldi")
@@ -1654,6 +1799,8 @@ def zarsalla(Gamer):
         aktifsira().oyunzari2 = zar2
         liste[2][5] = "Dice1      " + str(aktifsira().oyunzari1)
         liste[2][6] = "Dice2      " + str(aktifsira().oyunzari2)
+        liste[2][4] =  "Broken Flake of X "+str(X1oyuncusu.brokenflake)
+        liste[2][7] =  "Broken Flake of Y "+str(Y1oyuncusu.brokenflake)
         table.reset()
         table.add_rows(liste)
         print(table.draw())
@@ -1677,6 +1824,9 @@ def oyunabasla():
     ilkzaratilsin()
 
 def devamfonksiyonu():
+    global liste
+    liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+    liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
     global anadict
     global zarlar
     file1 = open('continue.txt', 'r')
@@ -1742,6 +1892,10 @@ def devamfonksiyonu():
     rakipoyuncu().brokenflake=int(Lines[29])
     rakipoyuncu().outflakes=int(Lines[30])
     file1.close()
+    liste[2][4] = "Broken Flake of X " + str(X1oyuncusu.brokenflake)
+    liste[2][7] = "Broken Flake of Y " + str(Y1oyuncusu.brokenflake)
+    table.reset()
+    table.add_rows(liste)
     print(table.draw())
     if(aktifsira().oyunzari1==aktifsira().oyunzari2):
         aktifsira().turnright=4-kackezoynadi
@@ -1798,3 +1952,4 @@ def sifirtoplayici():
             break
 
 oyunagiris()
+#END OF CODE
